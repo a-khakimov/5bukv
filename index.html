@@ -250,6 +250,28 @@
             line-height: 1.4;
         }
 
+        .loading-message {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #1976d2;
+        }
+
+        .error-message {
+            background: #ffebee;
+            border: 1px solid #ffcdd2;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #d32f2f;
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 20px;
@@ -295,6 +317,10 @@
         <h1>🎯 5БУКВ ЧИТ</h1>
         <p class="subtitle">Побеждай в '5БУКВ' каждый раз</p>
         
+        <div class="loading-message" id="loading-message">
+            Загружаем словарь...
+        </div>
+        
         <div class="instruction">
            Введите угаданные буквы в их точные позиции. Добавьте буквы, которые есть в слове, но позиция неизвестна. Исключите буквы, которых нет в слове.
         </div>
@@ -308,7 +334,11 @@
                            maxlength="1" 
                            placeholder="_"
                            onInput="handleLetterInput(0)"
-                           onKeyDown="handleKeyNavigation(event, 0)">
+                           onKeyDown="handleKeyNavigation(event, 0)"
+                           autocomplete="off"
+                           spellcheck="false"
+                           data-form-type="other"
+                           disabled>
                 </div>
                 <div class="letter-group">
                     <input type="text" 
@@ -317,7 +347,11 @@
                            maxlength="1" 
                            placeholder="_"
                            onInput="handleLetterInput(1)"
-                           onKeyDown="handleKeyNavigation(event, 1)">
+                           onKeyDown="handleKeyNavigation(event, 1)"
+                           autocomplete="off"
+                           spellcheck="false"
+                           data-form-type="other"
+                           disabled>
                 </div>
                 <div class="letter-group">
                     <input type="text" 
@@ -326,7 +360,11 @@
                            maxlength="1" 
                            placeholder="_"
                            onInput="handleLetterInput(2)"
-                           onKeyDown="handleKeyNavigation(event, 2)">
+                           onKeyDown="handleKeyNavigation(event, 2)"
+                           autocomplete="off"
+                           spellcheck="false"
+                           data-form-type="other"
+                           disabled>
                 </div>
                 <div class="letter-group">
                     <input type="text" 
@@ -335,7 +373,11 @@
                            maxlength="1" 
                            placeholder="_"
                            onInput="handleLetterInput(3)"
-                           onKeyDown="handleKeyNavigation(event, 3)">
+                           onKeyDown="handleKeyNavigation(event, 3)"
+                           autocomplete="off"
+                           spellcheck="false"
+                           data-form-type="other"
+                           disabled>
                 </div>
                 <div class="letter-group">
                     <input type="text" 
@@ -344,7 +386,11 @@
                            maxlength="1" 
                            placeholder="_"
                            onInput="handleLetterInput(4)"
-                           onKeyDown="handleKeyNavigation(event, 4)">
+                           onKeyDown="handleKeyNavigation(event, 4)"
+                           autocomplete="off"
+                           spellcheck="false"
+                           data-form-type="other"
+                           disabled>
                 </div>
             </div>
         </div>
@@ -357,7 +403,11 @@
                        id="present-letters" 
                        placeholder="абв"
                        onInput="updateSearch()"
-                       title="Буквы, которые есть в слове, но позиция неизвестна">
+                       title="Буквы, которые есть в слове, но позиция неизвестна"
+                       autocomplete="off"
+                       spellcheck="false"
+                       data-form-type="other"
+                       disabled>
             </div>
             
             <div class="filter-group excluded">
@@ -367,7 +417,11 @@
                        id="excluded-letters" 
                        placeholder="где"
                        onInput="updateSearch()"
-                       title="Буквы, которых точно нет в слове">
+                       title="Буквы, которых точно нет в слове"
+                       autocomplete="off"
+                       spellcheck="false"
+                       data-form-type="other"
+                       disabled>
             </div>
         </div>
 
@@ -377,13 +431,47 @@
                 <span class="results-count" id="word-count">0</span>
             </div>
             <div class="words-grid" id="words-grid"></div>
-            <button class="clear-btn" onclick="clearAll()">🔄 Очистить всё</button>
+            <button class="clear-btn" onclick="clearAll()" disabled>🔄 Очистить всё</button>
         </div>
     </div>
 
+    <!-- Подключаем внешний файл с словами -->
     <script src="nouns.js"></script>
     <script>
+        let wordsLoaded = false;
+
+        // Проверяем загрузку словаря
+        function checkWordsLoaded() {
+            if (typeof WORDS !== 'undefined' && Array.isArray(WORDS) && WORDS.length > 0) {
+                wordsLoaded = true;
+                enableInterface();
+                updateSearch();
+                document.getElementById('loading-message').style.display = 'none';
+            } else {
+                // Показываем ошибку если словарь не загрузился
+                setTimeout(() => {
+                    if (!wordsLoaded) {
+                        showError('Не удалось загрузить словарь. Убедитесь, что файл nouns.js находится в той же папке.');
+                    }
+                }, 2000);
+            }
+        }
+
+        function showError(message) {
+            const loadingMessage = document.getElementById('loading-message');
+            loadingMessage.className = 'error-message';
+            loadingMessage.textContent = message;
+        }
+
+        function enableInterface() {
+            // Активируем все поля ввода
+            const inputs = document.querySelectorAll('input, button');
+            inputs.forEach(input => input.disabled = false);
+        }
+
         function handleLetterInput(position) {
+            if (!wordsLoaded) return;
+            
             const input = document.getElementById(`letter-${position}`);
             let value = input.value.toLowerCase();
             
@@ -401,6 +489,8 @@
         }
 
         function handleKeyNavigation(event, position) {
+            if (!wordsLoaded) return;
+            
             const input = document.getElementById(`letter-${position}`);
             
             // Backspace - переход к предыдущему полю при пустом поле
@@ -422,6 +512,8 @@
         }
 
         function updateSearch() {
+            if (!wordsLoaded) return;
+            
             // Собираем введенное слово
             let pattern = '';
             for (let i = 0; i < 5; i++) {
@@ -498,6 +590,8 @@
         }
 
         function clearAll() {
+            if (!wordsLoaded) return;
+            
             // Очищаем поля букв
             for (let i = 0; i < 5; i++) {
                 const letterInput = document.getElementById(`letter-${i}`);
@@ -512,7 +606,8 @@
 
         // Инициализация
         document.addEventListener('DOMContentLoaded', () => {
-            updateSearch();
+            // Небольшая задержка для загрузки внешнего скрипта
+            setTimeout(checkWordsLoaded, 100);
         });
 
         // Обработка копирования слов
@@ -522,6 +617,11 @@
             setTimeout(() => {
                 document.title = originalTitle;
             }, 1500);
+        });
+
+        // Дополнительная проверка после загрузки всех скриптов
+        window.addEventListener('load', () => {
+            setTimeout(checkWordsLoaded, 200);
         });
     </script>
 </body>
