@@ -12,34 +12,36 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: #121213;
             min-height: 100vh;
             padding: 20px;
-            color: #333;
+            color: #ffffff;
         }
 
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
+            background: #121213;
+            border-radius: 0;
             padding: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            box-shadow: none;
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: #ffffff;
             margin-bottom: 10px;
-            font-size: 2.2em;
+            font-size: 2.5em;
             font-weight: 700;
+            letter-spacing: 4px;
         }
 
         .subtitle {
             text-align: center;
-            color: #666;
-            margin-bottom: 30px;
+            margin-top: 30px;
+            color: #818384;
+            margin-bottom: 50px;
             font-size: 1em;
         }
 
@@ -96,29 +98,36 @@
         }
 
         .letter-input {
-            width: 60px;
-            height: 60px;
-            padding: 10px;
-            border: 3px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 24px;
+            width: 62px;
+            height: 62px;
+            padding: 0;
+            border: 2px solid #3a3a3c;
+            border-radius: 4px;
+            font-size: 32px;
             text-align: center;
-            text-transform: lowercase;
-            font-weight: bold;
+            text-transform: uppercase;
+            font-weight: 700;
             transition: all 0.2s ease;
-            background: #f8f9fa;
+            background: #121213;
+            color: #ffffff;
+            font-family: inherit;
         }
 
         .letter-input:focus {
             outline: none;
-            border-color: #4CAF50;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+            border-color: #818384;
+            background: #121213;
+            box-shadow: none;
         }
 
         .letter-input:not(:placeholder-shown) {
-            border-color: #4CAF50;
-            background: #e8f5e8;
+            border-color: #818384;
+            background: #121213;
+            color: #ffffff;
+        }
+
+        .letter-input::placeholder {
+            color: #3a3a3c;
         }
 
         .filters-section {
@@ -129,49 +138,51 @@
         }
 
         .filter-group {
-            background: #f8f9fa;
+            background: #1a1a1b;
             padding: 20px;
-            border-radius: 15px;
-            border-left: 4px solid #FF9800;
-        }
-
-        .filter-group.excluded {
-            border-left-color: #9E9E9E;
+            border-radius: 8px;
+            border: 1px solid #3a3a3c;
         }
 
         .filter-group h3 {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-size: 1.1em;
             display: flex;
             align-items: center;
             gap: 8px;
+            color: #ffffff;
+            font-weight: 600;
         }
 
         .filter-input {
             width: 100%;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 12px;
+            border: 2px solid #3a3a3c;
+            border-radius: 6px;
             font-size: 16px;
-            text-transform: lowercase;
-            letter-spacing: 2px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
             text-align: center;
+            background: #121213;
+            color: #ffffff;
+            font-weight: 600;
         }
 
         .filter-input:focus {
             outline: none;
-            border-color: #FF9800;
+            border-color: #818384;
         }
 
-        .excluded .filter-input:focus {
-            border-color: #9E9E9E;
+        .filter-input::placeholder {
+            color: #565758;
+            text-transform: uppercase;
         }
 
         .results-section {
-            background: #f0f8ff;
-            border-radius: 15px;
+            background: #1a1a1b;
+            border-radius: 8px;
             padding: 20px;
-            border-left: 4px solid #2196F3;
+            border: 1px solid #3a3a3c;
         }
 
         .results-header {
@@ -184,92 +195,96 @@
         .results-title {
             font-size: 1.3em;
             font-weight: 600;
-            color: #333;
+            color: #ffffff;
         }
 
         .results-count {
-            background: #2196F3;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-weight: bold;
+            background: #6aaa64;
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-weight: 700;
             font-size: 0.9em;
         }
 
         .words-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 8px;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 10px;
             max-height: 300px;
             overflow-y: auto;
         }
 
         .word-item {
-            background: white;
-            padding: 12px 8px;
-            border-radius: 8px;
+            background: #818384;
+            padding: 14px 8px;
+            border-radius: 6px;
             text-align: center;
-            font-weight: 600;
-            color: #333;
-            border: 2px solid transparent;
-            transition: all 0.2s ease;
+            font-weight: 700;
+            color: #ffffff;
+            border: none;
+            transition: all 0.15s ease;
             cursor: pointer;
-            font-size: 0.95em;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .word-item:hover {
-            border-color: #2196F3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+            background: #6aaa64;
+            transform: scale(1.02);
         }
 
         .clear-btn {
-            background: linear-gradient(45deg, #f44336, #d32f2f);
-            color: white;
+            background: #818384;
+            color: #ffffff;
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 12px 24px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 0.9em;
+            font-weight: 600;
             margin-top: 15px;
             transition: all 0.2s ease;
+            text-transform: uppercase;
         }
 
         .clear-btn:hover {
+            background: #6aaa64;
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
         }
 
         .instruction {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
+            background: #1a1a1b;
+            border: 1px solid #3a3a3c;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 8px;
             margin-bottom: 20px;
-            font-size: 0.8em;
-            line-height: 1.4;
+            font-size: 0.9em;
+            line-height: 1.5;
+            color: #d7dadc;
         }
 
         .loading-message {
-            background: #e3f2fd;
-            border: 1px solid #bbdefb;
+            background: #1a1a1b;
+            border: 1px solid #3a3a3c;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 8px;
             margin-bottom: 20px;
             text-align: center;
             font-size: 0.9em;
-            color: #1976d2;
+            color: #6aaa64;
         }
 
         .error-message {
-            background: #ffebee;
-            border: 1px solid #ffcdd2;
+            background: #1a1a1b;
+            border: 1px solid #b85450;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 8px;
             margin-bottom: 20px;
             text-align: center;
             font-size: 0.9em;
-            color: #d32f2f;
+            color: #f5c2c7;
         }
 
         @media (max-width: 600px) {
@@ -294,28 +309,30 @@
         }
 
         .words-grid::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
 
         .words-grid::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 3px;
+            background: #1a1a1b;
+            border-radius: 4px;
         }
 
         .words-grid::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 3px;
+            background: #3a3a3c;
+            border-radius: 4px;
         }
 
         .words-grid::-webkit-scrollbar-thumb:hover {
-            background: #a1a1a1;
+            background: #565758;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎯 5БУКВ ЧИТ</h1>
-        <p class="subtitle">Побеждай в '5БУКВ' каждый раз</p>
+        <h1>
+            <span style="background: #b49f39; color: #ffffff; padding: 8px 12px; border-radius: 4px; margin-right: 8px;">5</span><span style="background: #b49f39; color: #ffffff; padding: 8px 12px; border-radius: 4px; margin-right: 8px;">Б</span><span style="background: #b49f39; color: #ffffff; padding: 8px 12px; border-radius: 4px; margin-right: 8px;">У</span><span style="background: #b49f39; color: #ffffff; padding: 8px 12px; border-radius: 4px; margin-right: 8px;">К</span><span style="background: #b49f39; color: #ffffff; padding: 8px 12px; border-radius: 4px;">В</span>
+        </h1>
+        <p class="subtitle">Побеждай в '5БУКВ' всегда</p>
         
         <div class="loading-message" id="loading-message">
             Загружаем словарь...
@@ -401,8 +418,8 @@
                 <input type="text" 
                        class="filter-input" 
                        id="present-letters" 
-                       placeholder="абв"
-                       onInput="updateSearch()"
+                       placeholder="АБВ"
+                       onInput="handleFilterInput('present-letters')"
                        title="Буквы, которые есть в слове, но позиция неизвестна"
                        autocomplete="off"
                        spellcheck="false"
@@ -415,7 +432,7 @@
                 <input type="text" 
                        class="filter-input" 
                        id="excluded-letters" 
-                       placeholder="где"
+                       placeholder="ГДЕ"
                        onInput="updateSearch()"
                        title="Буквы, которых точно нет в слове"
                        autocomplete="off"
@@ -469,15 +486,25 @@
             inputs.forEach(input => input.disabled = false);
         }
 
-        function handleLetterInput(position) {
+        function handleFilterInput(fieldId) {
             if (!wordsLoaded) return;
             
-            const input = document.getElementById(`letter-${position}`);
+            const input = document.getElementById(fieldId);
             let value = input.value.toLowerCase();
             
             // Разрешаем только русские буквы
             value = value.replace(/[^а-яё]/g, '');
-            input.value = value;
+            input.value = value.toUpperCase();
+            
+            updateSearch();
+        }
+
+        function handleLetterInput(position) {
+            if (!wordsLoaded) return;
+            
+            const input = document.getElementById(`letter-${position}`);
+            let value = input.value.replace(/[^а-яё]/g, '').toLowerCase();
+            input.value = value
             
             // Автопереход к следующему полю
             if (value && position < 4) {
@@ -567,14 +594,14 @@
             wordsGrid.innerHTML = '';
             
             if (words.length === 0) {
-                wordsGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #666; padding: 20px;">Слов не найдено</div>';
+                wordsGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #818384; padding: 20px; font-size: 0.9em;">Слов не найдено</div>';
                 return;
             }
             
             words.forEach(word => {
                 const wordDiv = document.createElement('div');
                 wordDiv.className = 'word-item';
-                wordDiv.textContent = word;
+                wordDiv.textContent = word.toUpperCase();
                 wordDiv.onclick = () => copyWord(word);
                 wordDiv.title = 'Кликните чтобы скопировать';
                 wordsGrid.appendChild(wordDiv);
